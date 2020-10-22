@@ -16,8 +16,7 @@ app.use((req, res) => {
 });
 
 // Start server after db connection
-// db.on("open", () => {
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-// });
