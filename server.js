@@ -15,8 +15,7 @@ app.use((req, res) => {
   res.status(404).end();
 });
 
-// Start server after db connection
-
+// Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
