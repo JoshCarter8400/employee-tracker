@@ -3,29 +3,29 @@ CREATE DATABASE employee;
 USE employee;
 
 CREATE TABLE department (
-  id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE role (
-  id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(30) NOT NULL,
   salary DECIMAL,
   department_id INTEGER UNSIGNED NOT NULL, 
   INDEX department_ind (department_id),
-  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id)
+  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
 );
 
-CREATE TABLE employee (
-  id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE employees (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL, 
   role_id INT UNSIGNED NOT NULL, 
-  INDEX role_ind (role_id),
+  INDEX roles_ind (role_id),
   CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE,
   manager_id INTEGER UNSIGNED NOT NULL, 
   INDEX manager_ind (manager_id),
-  CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id)  
+  CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employees(id) ON DELETE CASCADE
 );
 
 

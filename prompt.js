@@ -59,6 +59,7 @@ const addDepartment = () => {
     ])
     .then((questions) => {
       const query = connection.query("INSERT INTO department set ?");
+      addDepartment();
     });
 };
 
