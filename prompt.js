@@ -3,7 +3,7 @@ const inquirer = require("inquirer");
 
 const cTable = require("console.table");
 const db = require("./db/class");
-const { connection, updateRole } = require("./db/class");
+const { connection } = require("./db/class");
 const menuPrompt = function () {
   let questions = [
     {
@@ -17,7 +17,7 @@ const menuPrompt = function () {
         "Add a department",
         "Add a role",
         "View all Departments",
-        "Update employee role",
+        "Please select the new role ID for your employee",
       ],
     },
   ];
@@ -41,8 +41,9 @@ const menuPrompt = function () {
       case "Add a role":
         addRole();
         break;
-      case "Update employee role ID":
+      case "Please select the new role ID for your employee":
         updateRole();
+        break;
       default:
         console.log("Please make a choice");
     }
@@ -61,12 +62,14 @@ const viewDepartment = () => {
 const viewEmployees = () => {
   db.viewEmployees().then(([rows]) => {
     console.table(rows);
+    menuPrompt();
   });
 };
 
 const viewRoles = () => {
   db.viewRoles().then(([rows]) => {
     console.table(rows);
+    menuPrompt();
   });
 };
 
@@ -166,17 +169,30 @@ const addRole = () => {
 };
 
 const updateRole = () => {
-  viewEmployees();
   inquirer
-    .prompt({
-      type: "list",
-      type: "role",
-      message: "Please select the new role ID for your employee",
-      choices: ["1", "2", "3"],
-    })
+    .prompt([
+      {
+        type: "list",
+        name: "role_id",
+        message: "Please select the new role ID for your employee",
+        choices: ["1", "2", "3"],
+      },
+      {
+        type: "input",
+        name: "first_name",
+        message: "Please enter employee's first name",
+      },
+      {
+        type: "input",
+        name: "last_name",
+        message: "Please enter employee's last name",
+      },
+    ])
     .then((res) => {
       db.updateRole({
-        role_id: res.role,
+        role_id: res.role_id,
+        first_name: res.first_name,
+        last_name: res.last_name,
       });
       console.log("Role was successfully updated");
       menuPrompt();

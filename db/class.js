@@ -36,7 +36,10 @@ class DB {
   updateRole(update) {
     return this.connection
       .promise()
-      .query("UPDATE employee SET ? WHERE ?", update);
+      .query(
+        "UPDATE employees SET role_id = ? WHERE first_name = ? last_name = ?",
+        update
+      );
   }
 }
 
