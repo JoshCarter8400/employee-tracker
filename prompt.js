@@ -53,7 +53,7 @@ const viewDepartment = () => {
         choices: ["Guard", "Forward", "Center"],
       },
     ])
-    .then((questions) => {
+    .then((answers) => {
       const query = connection.quey("SELECT * FROM department");
       viewDepartment();
     });
@@ -95,9 +95,24 @@ const addDepartment = () => {
         choices: ["Bulls", "Sonics", "Cavs", "Rockets", "Knicks", "Lakers"],
       },
     ])
-    .then((questions) => {
-      const query = connection.query("INSERT INTO department set ?");
-      addDepartment();
+    .then((answers) => {
+      const query = connection.query(
+        "INSERT into employee set ?",
+        {
+          department: answers.bulls,
+          department: answers.sonics,
+          department: answers.cavs,
+          department: answers.rockets,
+          department: answers.knicks,
+          department: answers.lakers,
+        },
+        function (err, res) {
+          if (err) throw err;
+          console.log(res.affectedRows + " department inserted!\n");
+          // Call addDepartment() AFTER the INSERT completes
+          addDepartment();
+        }
+      );
     });
 };
 
@@ -167,12 +182,24 @@ const addRole = () => {
         type: "input",
         name: "role",
         message: "Which role would you like to add?",
-        // choices: ["Guard", "Forward", "Center"],
+        choices: ["Guard", "Forward", "Center"],
       },
     ])
-    .then((questions) => {
-      const query = connection.query("INSERT INTO role set ?");
-      addRole();
+    .then((answers) => {
+      const query = connection.query(
+        "UPDATE role set ? WHERE",
+        {
+          role: answers.guard,
+          role: answers.forward,
+          role: answers.center,
+        },
+        function (err, res) {
+          if (err) throw err;
+          console.log(res.affectedRows + " role updated!\n");
+          // Call addRole() AFTER the INSERT completes
+          addRole();
+        }
+      );
     });
 };
 
