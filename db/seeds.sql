@@ -9,9 +9,9 @@ VALUES
 
 INSERT INTO role (salary, title, department_id)
 VALUES
-(100000, "Forward", 2),
-(200000, "Guard", 1),
-(300000, "Center", 3);
+(100.000, "Forward", 2),
+(200.000, "Guard", 1),
+(300.000, "Center", 3);
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES

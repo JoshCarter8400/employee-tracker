@@ -20,11 +20,23 @@ let questions = [
 ];
 inquirer.prompt(questions).then((choice) => {
   switch (choice.name) {
-    case "Add Employee":
+    case "Add an Employee":
       addEmployee();
       break;
-    case "View Department":
+    case "View all Departments":
       viewDepartment();
+      break;
+    case "View all roles":
+      viewRoles();
+      break;
+    case "View all employees":
+      viewEmployees();
+      break;
+    case "Add a department":
+      addDepartment();
+      break;
+    case "Add a Role":
+      addRole();
       break;
     default:
       console.log("Please make a choice");
@@ -44,6 +56,32 @@ const viewDepartment = () => {
     .then((questions) => {
       const query = connection.quey("SELECT * FROM department");
       viewDepartment();
+    });
+};
+
+const viewEmployees = () => {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "employees",
+        message: "Please choose your employee",
+        choices: [
+          "Michael Jordan",
+          "Shawn Kemp",
+          "Hakeem Olajuwon",
+          "Gary Payton",
+          "Magic Johnson",
+          "Clyde Drexler",
+          "Scottie Pippen",
+          "Lebron James",
+          "Patrick Ewing",
+        ],
+      },
+    ])
+    .then((questions) => {
+      const query = connection.quey("SELECT * FROM employee");
+      viewEmployees();
     });
 };
 
@@ -103,5 +141,53 @@ const addEmployee = () => {
           addEmployee();
         }
       );
+    });
+};
+
+const viewRoles = () => {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "roles",
+        message: "Please choose your role",
+        choices: ["Guard", "Forward", "Center"],
+      },
+    ])
+    .then((answers) => {
+      const query = connection.quey("SELECT * FROM role");
+      viewRoles();
+    });
+};
+
+const addRole = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "role",
+        message: "Which role would you like to add?",
+        // choices: ["Guard", "Forward", "Center"],
+      },
+    ])
+    .then((questions) => {
+      const query = connection.query("INSERT INTO role set ?");
+      addRole();
+    });
+};
+
+const updateRole = () => {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "role",
+        message: "Which role would you like to update?",
+        choices: ["Guard", "Forward", "Center"],
+      },
+    ])
+    .then((questions) => {
+      const query = connection.query("UPDATE role set ? WHERE");
+      updateRole();
     });
 };
