@@ -17,7 +17,7 @@ const menuPrompt = function () {
         "Add a department",
         "Add a role",
         "View all Departments",
-        "Please select the new role ID for your employee",
+        "Update employee role",
       ],
     },
   ];
@@ -41,7 +41,7 @@ const menuPrompt = function () {
       case "Add a role":
         addRole();
         break;
-      case "Please select the new role ID for your employee":
+      case "Update employee role":
         updateRole();
         break;
       default:
