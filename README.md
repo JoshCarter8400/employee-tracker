@@ -1,4 +1,4 @@
-# employee-tracker
+# Employee-Tracker
 This is a command line application that allows the owner of a business to view and manage the employees and departments of the business as they see fit to organize and improve the business. they can see salaries, id's, names, and manager id's 
 ## Tools and languages used
 * JavaScript ES6
