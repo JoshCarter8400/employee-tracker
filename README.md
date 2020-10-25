@@ -19,4 +19,5 @@ This is a command line application that allows the owner of a business to view a
   * To start the application once everything is installed you can run node prompt to start the process and manage your business
   
   ## Demo of app
+  You can view a walkthrough video of the app [here](https://drive.google.com/file/d/1UGaoigaSNjBwoRfkr0olVUatX_lssFCB/view)
   
